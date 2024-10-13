@@ -1,0 +1,127 @@
+\lecture{1}{11/10/2024}{Introduction}
+% Harvey Reall
+% Office Hours are Friday 2-3pm B2.09
+% Goldenfeld
+% Kardar
+
+\subsection*{Motivation}
+
+This course concerns itself with \textbf{universality}: the idea that different physical systems can exhibit the same behaviour.
+
+For example, a liquid gas system has a critical temperature, below which a first order phase transition can be found between liquid and gas. Above it there is no such distinction and one can only move continuously.
+
+Experiments suggest that as a function of the temperature, the density is given by $\left| \rho^{\pm} - \rho_c \right| \propto \left|  T - T_C \right|^{\beta}$ with $\beta \approx 0.327$ for $T \approx T_C$.
+
+Another example is ferromagnets for which one also has a \textbf{critical temperature} called the Curie temperature $T_C$.
+
+For $T > T_C$, $M = 0$, and for $T \leq T_C$ $M \propto \left( T_C - T \right)^{\beta}$ where the critical exponent $\beta$ is as observed for gases.
+
+In this course we will be studying the \textbf{classical statistical mechanics of fields}.
+
+\section{From Spins to Fields}
+
+\subsection{The Ising Model}
+
+The Ising model is a simple model for a magnet. In $d$ spatial dimensions, consider a lattice with $N$ sites.
+
+On the $i$th site we have a ``spin'' $S_{i} \in \{-1,1\} $. The configuration $\{s_{i}\} $ has energy 
+\begin{align}
+    E = - B \sum_{i}^{s_{i}} - J \sum_{\left<ij \right>}^{} s_{i} s_{j}
+,\end{align}
+where $B$ represents an external magnetic field and $J$ represents an interaction strength. Naturally, one should ask how the physics depends on $B$, $J$ and the temperature $T$.
+
+For:
+\begin{itemize}
+    \item $J > 0$, the spins prefer to be aligned: $\up \up$ or $\down \down$. This is a \textbf{ferromagnet}.
+    \item $J < 0$, the spins prefer to be anti-aligned: $\up \down$ or $\down \up$. This is an \textbf{anti-ferromagnet}.
+
+        We will assume and fix $J > 0$.
+
+    \item For $B > 0$ spins prefer $\up$
+    \item For $B < 0$ spins prefer $\down$
+
+
+    \item At low temperature, the system wants to minimise energy. This leads to an ordered state where all spins will align due to the lower energy preferenced state.
+    \item At high temperature, entropy dominates which leads to a disordered state.
+\end{itemize}
+
+Recall that in the \textbf{canonical ensemble}, the probability of a given configuration $\{s_{i}\} $ is
+\begin{align}
+    p \left[ s_{i}  \right] = \frac{1}{Z} e^{-\beta E \left[ s_{i} \right] }
+,\end{align}
+where $\beta = \frac{1}{T}$, $k_B = 1$ and $Z$ is the \textbf{partition function}.
+
+\begin{definition}
+    The \textbf{partition function} is given by
+    \begin{align}
+        Z\left( T,B \right) = \sum_{\{s_{i}\} }^{} e^{-\beta E \left[ s_{i}  \right] }
+    .\end{align}
+\end{definition}
+
+\begin{definition}
+    The \textbf{thermodynamic free energy} $F_{\text{thermo}}\left( T,B \right) = \left<E \right> - TS = -T \log Z $ 
+\end{definition}
+
+\begin{definition}
+    The \textbf{magnetisation} is 
+    \begin{align}
+        m = \frac{1}{N} \left<\sum_{n=1}^{^{N}}  s_{i} \right> \in \left[ -1,1 \right] 
+    .\end{align}
+\end{definition}
+
+\begin{note}
+    The average $\left< X \right>$ is an average over the probability distribution $p\left[  s_{i}\right] $ at a fixed $T$.
+\end{note}
+
+Magnetisation is an \textbf{order parameter} as it can distinguish between ordered phases ($m \neq 0$) and disordered phases where $m \approx 0$. We can expand the expectation value in $m$ such that
+\begin{align}
+    m = \sum_{\{s_{i}\} }^{} \frac{1}{Z} e^{-\beta \left[ E_{i} \right] } \frac{1}{N} \sum_{i}^{} s_{i} = \frac{1}{N\beta} \pdv{\beta} \log Z
+.\end{align}
+
+Therefore we want to compute the partition function as it will allow us to derive these observables.
+
+This is easy in $d = 1$. This is hard in $d = 2$ and there is no general solution for generic lattices. For a square lattice with $B=0$ it is possible and was famously solved by Onsager (winning him some famous prize). $d \geq 3$ are intractable analytically.
+
+Our aim is to approximate in a way that correctly captures the long-distance behaviour.
+
+We can define $m$ for any $\{s_{i}\} $ by $m = \frac{1}{N} \sum_{}^{} s_{i}$, now no longer taking a statistical average. We can then write the partition function as
+\begin{align}
+    Z = \sum_{m} \sum_{\{s_{i}\} \mid m}  e^{-\beta E \left[ s_{i} \right] } =: \sum_{m}^{} e^{-\beta F \left( m \right) }
+.\end{align}
+
+The spacing in allowed values of $m$ is $\frac{2}{N}$. For $N \gg 1$ we can approximate $m$ as continuous however and thus write the partition function as
+\begin{align}
+    Z \approx \frac{N}{2} \int_{-1}^{1} \dd{m} e^{-\beta F\left( m \right) }
+.\end{align}
+
+We call $F\left( m \right) $ the \textbf{effective free energy} which depends on $T,B$ and critically, $m$. This contains more information than $F_{\text{thermo}}$.
+
+Let $f\left( m \right) = \frac{1}{N}F\left( m \right)$ and thus
+\begin{align}
+    Z \propto \int_{-1}^{1} \dd{m} e^{-\beta N f\left( m \right) }
+.\end{align}
+
+For $N$ large, $\beta f\left( m \right) \sim  \mathcal{O}\left( 1 \right) $ as it is an \textbf{intensive} property (doesn't scale with the system). Performing a saddle point approximation, we can replace $f\left( m \right) $ by it's minimum where
+\begin{align}
+    \pdv{f}{m} \bigg|_{m=m_{\text{min}}} = 0
+,\end{align}
+which gives us a partition function of
+\begin{align}
+    Z \propto e^{-\beta N f\left( M_{\text{min}} \right) }
+,\end{align}
+which gives us a thermodynamic free energy of
+\begin{align}
+    F_{\text{thermo}}\left( T,B \right) \approx F\left( M_{\text{min}}\left( T,B \right) , T,B \right) 
+.\end{align}
+
+Even with the saddle point approximation, computing $F\left( m \right) $ is hard. One such approach is to use the \textbf{mean field approximation} where we replace each spin by the average of the field, $s_{i} \to m$. This gives
+\begin{align}
+    E = - \beta \sum_{_{i}}^{} m - J \sum_{\left<ij \right>}^{} m^2 = - B N m - \frac{1}{2} N J q m^2
+,\end{align}
+where $q$ is the number of nearest neighbours. $q = 2d+2$ for a square lattice in $d$ dimensions. 
+
+Therefore in the mean field approximation, the partition function becomes
+\begin{align}
+    Z \approx \sum_{m}^{} \Omega \left( m \right) e^{-\beta E\left[ n \right] } 
+,\end{align}
+where $\Omega\left( m \right) $ is the number of configurations with $\frac{1}{N} \sum s_{i} = m$.
