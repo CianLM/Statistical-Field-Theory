@@ -1,0 +1,125 @@
+\lecture{2}{15/10/2024}{}
+
+Let $N_{\up}$ be the number of up spins and thus $N_{\down} = N - N_{\up}$ down spins. The magnetisation is therefore
+\begin{align}
+    m = \frac{N^{\up} - N_\down}{N} = \frac{2N^{\up} - N}{N}
+.\end{align}
+
+The number of configurations with this magnetisation is
+\begin{align}
+    \Omega \left( m \right) = \frac{N!}{N_\up ! \left( N - N_{\up}! \right)} = \frac{N}{N_{\up}! N_\down !}
+.\end{align}
+
+Using the Stirling approximation,
+\begin{align}
+    \log n! = n \log n - n
+,\end{align}
+we have
+\begin{align}
+    \log \Omega \approx N \left( \log N - 1 \right)  - N_\up \left( \log N^{\up} - 1 \right) - N_{\down} \left( \log N_\down - 1 \right) 
+,\end{align}
+and thus
+\begin{align}
+    \frac{\log \Omega}{N} \approx \log 2 - \frac{1}{2} \left( 1 + m \right) \log \left( 1 + m \right) - \frac{1}{2} \left( 1 - m \right) \log \left( 1 - m \right) 
+.\end{align}
+
+Therefore, we have in the mean field approximation that
+\begin{align}
+    e^{-\beta N f\left( m \right) } &\approx \Omega \left( m \right) e^{-\beta E \left( m \right) } \\
+    \implies f\left( m \right) &\approx - Bm - \frac{1}{2} J q m^2 - T \left[ \log 2 - \frac{1}{2} \left( 1 + m \right)  \log \left( 1 + m \right) - \frac{1}{2} \left( 1 - m \right) \log \left( 1 - m \right)  \right] 
+.\end{align}
+
+We now move to minimise $f$ such that $\pdv{f}{m} = 0$. This implies
+\begin{align}
+    \beta \left( B + J q m \right) &= \frac{1}{2} \log \left( \frac{1 + m}{1 - m} \right)  \\
+    \implies m &= \tanh \left[ \beta \underbrace{\left( B + Jqm \right)}_{B_\text{eff}}  \right] 
+.\end{align}
+
+Each spin feels an \textit{effective} $B$ field $B_\text{eff}\left( m \right) $.
+
+\subsection{Landau Theory of phase transitions}
+
+At a phase transition some quantity, called the \textbf{order parameter}, is not smooth. For us this is $m$. For small $m$, we have
+\begin{align}
+    f\left( m \right) = - T \log 2 - Bm + \frac{1}{2} \left( T - \underbrace{Jq}_{T_C} \right) m^2 + \frac{1}{12} T m^{4} + \cdots
+.\end{align}
+
+Notice we have introduced the critical temperature, $T_C = Jq$.
+
+The natural question is: In equilibrium at $m = m_\text{min}$, how does this behave as we vary the temperature $T$ or the external magnetic field $B$.
+
+For $B = 0$ this reduces to
+\begin{align}
+    f \left( m \right) = \frac{1}{2} \left( T - T_C \right) m^2 + \frac{1}{2} T m^{4} + \cdots
+.\end{align}
+
+For $T > T_C$, $m_\text{min} = 0$, and for $T < T_C$, $m_{\text{min}} = \pm m_0 = \pm \sqrt{\frac{3 \left( T_C - T \right) }{T}}$. This is valid for $m_0 \ll 1$ i.e. $T$ close to $T_C$. 
+
+Plotting the minima as a function of $T$, we see a branching at $T = T_C$ and while continuous the function is not smooth and thus we have a phase transition.
+
+\begin{itemize}
+    \item For $T > T_C : m = 0$ is called the \textit{disordered phase},
+    \item For $T < T_C : m \neq 0$ is called the \textit{ordered phase}.
+\end{itemize}
+
+This is an example of a \textit{continuous phase transition}, or in modern language \textit{second order phase transition}.
+
+\begin{notes}~
+    \begin{itemize}
+        \item Notice that $F$ is invariant under $\Z_2$ symmetry with simultaneous $m \to -m$  and $B \to - B$ (inherited from the Ising model's symmetry of $s_i \to -s_i$ and $B \to -B$).
+        \item For $T < T_C$, either $m = + m_0$ or $m = - m_0$ so the $\Z_2$ symmetry of the system does not preserve the ground state. This is called \textbf{spontaneous symmetry breaking}.
+        \item At finite $N$, $Z$ is analytic in $T$ and $B$. Therefore, phase transitions can only occur in the limit $N \to \infty$.
+        \item Spontaneous symmetry breaking also only occurs for $N \to \infty$. Namely,
+            \begin{align}
+                m = \lim_{B \to 0} \lim_{N \to \infty} \frac{1}{N} \sum_{}^{} \left<s_{i} \right>
+            ,\end{align}
+            if the order of these limits is reversed we would get $m = 0$ for all temperatures $T$. This follows from the $\Z_2$ symmetry as at finite $N$, $\Z_2$ symmetry implies $Z$ is an even function in $B$ and thus $F_\text{thermo}$ is as well. Then,
+            \begin{align}
+                \left<m \right> = -\frac{1}{N} \pdv{F_\text{thermo}}{B} \bigg|_{B=0} = 0
+            ,\end{align}
+            as the derivative of an even function is an odd function which necessarily vanishes at zero.
+    \end{itemize}
+\end{notes}
+
+
+\begin{definition}
+    The \textbf{heat capacity} is defined
+    \begin{align}
+        C = \pdv{ \left<E \right>}{T} = \pdv{T} \left( - \pdv{\log Z}{\beta} \right)  = \beta^2 \pdv[2]{\log Z}{\beta}
+    ,\end{align}
+\end{definition}
+
+This implies
+\begin{align}
+    \log Z &= - \beta N f\left( m_\text{min} \right)  \\
+    &= \begin{cases}
+        \text{const}, & T > T_C, \\
+        \frac{3N}{4} \frac{\left( T_C - T \right)^2}{T^2} + \text{const}, & T < T_C.
+    \end{cases} 
+\end{align}
+
+It is more fruitful to work with the \textbf{specific heat capacity} given by
+\begin{align}
+    c = \frac{C}{N} = \begin{cases}
+        0, & T \to T_C \text{from above,}\\
+        \frac{3}{2}, & T \to T_C \text{~from below}.
+    \end{cases}
+\end{align}
+Therefore $c$ is \textit{discontinuous} at $T = T_C$.
+
+So far our discussion has assumed $B = 0$ in the limit. We now work with finite $B > 0$. This gives us
+\begin{align}
+    f \left( m \right) \approx - B m + \frac{1}{2} \left( T - T_C \right) m^2 + \frac{1}{12} T m^{4} + \cdots
+.\end{align}
+
+For $T > T_C$ we have a concave curve with a single positive minima $m_{\text{min}} \approx \frac{B}{T}$ for $T \to \infty$.
+
+For $T < T_C$, we still have a double well with two local minima, but now they are no longer degenerate and there is a true global minimum. The other is referred to as a \textit{metastable state}, as it may be stable on short time scales, but given sufficient time and perturbations, would decay to the true minimum $m_\text{min}$.
+
+As a function of $T$ the global minimum $m_\text{min}\left( T \right) $ is now a smooth function of temperature which implies we see no phase transition if $T$ is varied at fixed $B \neq 0$.
+
+However, we can now instead vary $B$ at fixed $T < T_C$. For $B > 0$ we see the weighted double well as we did before and for $B = 0$ the degenerate double well. For $B < 0$ we see the global minima discontinuously shifts (from $m_0$ to $-m_0$) as $B$ decreases from $B > 0$ to $B < 0$.
+
+This is an example of a \textbf{discontinuous phase transition} which is also called a \textbf{first order phase transition} as our order parameter is the first derivative of $m_\text{equil} = - \pdv{f_\text{thermo}}{B}$. As this is discontinuous, we call it a first order phase transition.
+
+Therefore, as a function of $B$ \textbf{and} $T$ for $B = 0$ and $T < T_C$ we see a line of first order phase transitions. For $B = 0$ and $T = T_C$, this becomes a second order phase transition.
