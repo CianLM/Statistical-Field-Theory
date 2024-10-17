@@ -1,0 +1,148 @@
+\lecture{3}{17/10/2024}{}
+
+If one fixes $T = T_C$ we see
+\begin{align}
+    f \approx - Bm + \frac{1}{12} T_C m^{4} + \cdots
+,\end{align}
+where minimizing leads to $m^3 \sim B \implies m \sim  B^{\frac{1}{3}}$ for small $m$.
+
+It is natural then to define $\pdv{m}{B}$.
+
+\begin{definition}
+    We call $\xi$ the \textbf{magnetic susceptibility} and is given by
+    \begin{align}
+        \xi = \left( \pdv{m}{B} \right)_T
+    .\end{align}
+\end{definition}
+
+For $T > T_C$, we see
+\begin{align}
+    f \left( m \right) \approx - B m + \frac{1}{2} \left( T - T_C \right) m^2 + \cdots
+,\end{align}
+which implies
+\begin{align}
+    m \approx \frac{B}{T - T_C} \implies \xi = \frac{1}{T - T_C}
+.\end{align}
+
+For $T < T_C$, we write $m = m_0 + \delta m$ and solve for $\delta m$ to leading order in $B$. This leads to
+\begin{align}
+    m = m_0 + \frac{B}{2 \left( T_C - T \right) }
+,\end{align}
+which implies
+\begin{align}
+    \xi \approx \frac{1}{2 \left( T_C - T \right) }
+,\end{align}
+and thus
+\begin{align}
+    \xi \sim  \frac{1}{\left| T - T_C \right| }
+,\end{align}
+which diverges at $T_C$ from both sides.
+
+\subsection{Validity of Mean Field Theory}
+
+Naturally, given all these approximations, one may ask if they, especially mean field theory, give correct results. This is a function of dimension it turns out.
+\begin{itemize}
+    \item In $d = 1$, MFT is not valid as there are no phase transitions.
+    \item In $d = 2,3$, the phase diagram is qualitatively correct, but qualitative predictions at the critical point are incorrect.
+    \item In $d \geq 4$, MFT both gives the correct phase diagram and qualitative predictions of behaviour.
+\end{itemize}
+
+This is similar for other systems: Mean field theory gets the phase structure wrong for $d \leq d_L$ for some \textit{lower critical dimension} and mean field theory is correct for $d > d_{c}$, for some \textit{upper critical dimension}. For Ising one has $d_c = 1$ and $d_L = 4$. For $d_c < d < d_L$ there is interesting disagreement.
+
+\subsection{Critical Exponents}
+
+
+The qualitative predictions that are often disagreeing in MFT are \textit{critical exponents}. Near the critical point, MFT predicts if $B = 0$,
+\begin{align}
+    \begin{cases}
+        m \sim  \left( T_C - T \right)^{\beta}, & \beta = \frac{1}{2}, \text{~as $T \to T_C^{-}$,} \\
+        c \sim C_{\pm} \left| T - T_C \right|^{\alpha}, & \alpha = 0, \text{~as $T \to T_C^{+}$,}\\
+        \xi \sim  \left| T - T_C \right|^{-\xi}, & \xi = 1. 
+    \end{cases}
+\end{align}
+
+If $T = T_C$ as $B \to 0$, $m \sim  B^{\frac{1}{\delta}}$ where $\delta = 3$. This behaviour is correct, and agrees with the exact solution of the Ising model in $d = 2$, but the values of $\alpha , \beta , \gamma, \delta$ are \textbf{not}.
+
+\begin{table}[h]
+    \centering
+    \caption{Critical Exponents}
+    \label{tab:ce}
+    \begin{tabular}{c|ccc}
+     & MFT & $d= 2$ & $d = 3$ \\
+     \midrule
+        $\alpha$ & 0 & 0 & 0.1101 \\
+        $\beta$ & $\frac{1}{2}$ & $\frac{1}{8}$ & $0.3264$ \\
+        $\gamma$ & $1$ & $\frac{7}{4}$ & 0.3264 \\
+        $\delta$ & 3 & 15 & 4.7898
+    \end{tabular}
+\end{table}
+
+The $d = 2$ data here comes from the exact solution to the Ising model and the $d = 3$ data come from simulations as there is no exact solution known.
+
+There is a notion of universality here, in that for any normal material we see a similar Liquid-gas phase transition. Namely a line of first order phase transitions ending at a critical point with a second order phase transition.
+
+The external magnetic field is instead the pressure $B \leftrightarrow p$  and our order parameter, which was magnetisation, is now $m \leftrightarrow v \equiv \frac{V}{N}$.
+
+Similar to before, we have
+\begin{align}
+    \begin{cases}
+        v_{\text{gas}} - v_{\text{liquid}} \sim  \left( T_C - T \right)^{\beta}, & \beta = \frac{1}{2}, \text{~as $T \to T_C^{-}$ and $p = p_C$,}\\
+        v_{\text{gas}} - v_{\text{liquid}} \sim \left( p - p_C \right)^{\frac{1}{2}}, & \delta = 3, \text{~as $p \to p_C$ and at $T = T_C$.}
+    \end{cases}
+\end{align}
+
+\subsection{Isothermal compressibility}
+
+One has
+\begin{align}
+    \kappa = \frac{1}{v} \left( \pdv{v}{p} \right)_{T} \sim \frac{1}{\left| T - T_C \right|^{\xi}} 
+,\end{align}
+where $\xi = 1$. The heat capacity is
+\begin{align}
+    C_V \sim  C_{\pm} \left| T - T_C \right|^{-\alpha}
+,\end{align}
+where $\alpha = 0$. The predictions for $\alpha, \beta, \xi, \delta$ are the same as the MFT for the Ising model.
+
+This is surprising and experiment verifies that the true values of these critical exponents are the same as the critical values for $d = 3$ Ising theory.
+
+This is an example of \textbf{universality}: different physical systems can exhibit the same behaviour at the critical point. This suggests that the microscopic physics is unimportant at a critical point. Systems governed by the same critical point belong to the same \textbf{universality class}.
+
+\subsection{Landau-Ginzburg theory}
+
+Therefore, if we can describe one such theory in a universality class, we can describe them all. Therefore our aim becomes: find one model that correctly describes the \textit{long-distance} physics near the critical point and use it to compute the critical exponents for all theories in the same universality class.
+
+Landau-Ginzburg theory, also called \textit{Landau theory} generalizes MFT to allow for spatial variations in $m$. $M\left( \vb{x} \right) $ is now a field.
+
+The field $M\left( \vb{x} \right) $ is produced from a microscopic model by \textbf{course-graining}, where we average over scales small compared to the length scales we are interested in but large compared to the microscopic physics.
+
+In the Ising model, for example, one can course grain the lattice over boxes of side length $a$ each with $N' \ll N$ sites. We define
+\begin{align}
+    M\left( \vb{x} \right) = \frac{1}{N'} \sum \text{~spins in box with center $\vb{x}$}
+.\end{align}
+
+Take $N' \gg 1$ so disorderedness of $M\left( \vb{x} \right) $ can be ignored, $M\left( \vb{x} \right)  \in \left[ -1,1 \right] $. We also assume $a \ll \xi$, the length scale over which physics varies (i.e. Temperature etc.).
+
+We then treat $M \left( \vb{x} \right) $ as a smooth function that doesn't rely on scales less than $a$. We then proceed as before.
+
+The partition function can be written
+\begin{align}
+    Z &= \sum_{M \left( \vb{x} \right) } \sum_{\{s_{i}\}  \mid M\left( \vb{x} \right) } e^{-\beta E \left[ s \right] } \\
+      &=  \sum_{M \left( \vb{x} \right) }^{} e^{-\beta F \left[ M \left( \vb{x} \right)  \right] }
+  ,\end{align}
+  where $F \left[ M \left( \vb{x} \right)  \right] $ is a \textit{functional} called the \textbf{Landau-Ginzburg free energy}.
+
+\begin{definition}
+    We convert this sum over all possible functions to a \textbf{path integral}, written and defined such that
+    \begin{align}
+        Z = \int \mathcal{D}\left[ M\left( \vb{x} \right) \right]  e^{-\beta F \left[ M \left( \vb{x} \right)  \right] }
+    .\end{align}
+    This is a \textit{functional integral} which sums over all possible fields $M\left( \vb{x} \right) $ that don't vary on scales less than $a$.
+\end{definition}
+
+
+
+
+
+
+
+
