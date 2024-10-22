@@ -1,0 +1,105 @@
+\lecture{4}{22/10/2024}{The path integral}
+
+We can interpret this as the probability of a field configuration, $m \left( \vb{x} \right) $,
+\begin{align}
+    P \left[ m \left( \vb{x} \right)  \right] = \frac{1}{Z} e^{-\beta F \left[ m \left( \vb{x} \right)  \right] }
+.\end{align}
+
+The form of $F \left[ m \left( \vb{x} \right)  \right] $ is constrained by the following
+\begin{itemize}
+    \item \textit{locality}, spins only influence nearby spins, which leads to
+        \begin{align}
+            F \left[ m \left( \vb{x} \right)  \right] = \int \dd{^{d}x} f \left( m \left( \vb{x} \right) , \grad_i m \left( \vb{x} \right) , \grad_i \grad_j m \left( \vb{x} \right) , \cdots \right) 
+        ,\end{align}
+        i.e. not $\int \dd{^{d}x} \dd{^{d}y} f \left( m \left( \vb{x} \right) , m \left( \vb{y} \right)  \right) $ which would be a non-local interaction.
+    \item \textit{Translational symmetry}, which is inherited from the discrete translational symmetry of the lattice.
+    \item \textit{Rotational symmetry}, which also follows from the lattice however we strengthen this symmetry and assume it holds for \textit{any} rotation.
+    \item $\Z_2$ \textit{symmetry}, $B = 0$ Ising model has $s_{i} \to - s_{i}$ and if $B \neq 0$, one can flip $s_{i} \to -s_{i}$ and $B \to - B$ which leaves the theory invariant. We then assume $F$ is invariant $m \left( \vb{x} \right) \to - m \left( \vb{x} \right) $ and $B \to - B$.
+    \item and finally, we assume \textit{analyticity}: $F \left[ m \left( \vb{x} \right)  \right] $ defined by this course graining over a finite number of spins, suggests that $F$ is going to be analytic which lets us Taylor expand it near $m = 0$.
+\end{itemize}
+
+By dimensional analysis, one can see that each successive derivative contributes less as we assumed that $m$ only varies on a scale $\xi \gg a$. Therefore, for $B = 0$, Taylor expanding $m$,
+\begin{align}
+    F \left[ m\left( \vb{x} \right)  \right]  = \int \dd{^{d}x} \left( \frac{1}{2} \alpha_2 \left( T \right) m^2 + \frac{1}{4} \alpha^{4}\left( T \right) m^{4} + \frac{1}{2} \gamma \left( T \right) \left( \grad m \right)^2 + \cdots  \right) 
+.\end{align}
+
+We could include $F_0 \left( T \right) $ however this does not contribute a physically significant term in mean field theory. When $B \neq 0$ one includes odd powers of $m$.
+
+The coefficients $\alpha_{2i} \left( T \right) $ are hard to compute from first principles, however from mean field theory we expect
+\begin{align}
+    \alpha_2 \left( T \right) \sim  T - T_C, && \alpha_4 \left( T \right) \sim  \frac{1}{3} T
+,\end{align}
+however all we'll assume is that the coefficients are analytic in $T$, that $\alpha_2 \left( T \right) $ has a simple zero (i.e. it crosses) at some $T = T_C$ and that $\gamma \left( T \right) > 0$.
+
+We once again use a \textit{saddle point approximation}. We assume the functional integral is dominated by a saddle point, i.e. some $m \left( \vb{x} \right) $ that minimises $F \left[ m \left( \vb{x} \right)  \right] $. To do this, we vary $m \left( \vb{x} \right) \to m \left( \vb{x} \right) + \delta m \left( \vb{x} \right) $, and inspect
+\begin{align}
+    \delta F = \int \dd{^{d}x} \left( \alpha_2 m \delta m + \alpha_4 m^3 \delta m + \gamma \grad m \cdot \grad \delta m + \cdots \right) 
+,\end{align}
+where we use integration by parts to provide
+\begin{align}
+    \delta F = \int \dd{^{d}x} \underbrace{\left( \alpha_2 m  + \alpha_4 m^3 - \gamma \grad \cdot \grad m \cdot + \cdots \right)}_{\fdv{F}{m \left( \vb{x} \right) }} \delta m 
+.\end{align}
+
+If $m \left( \vb{x} \right) $ minimises $F$, then $\delta F = 0$, $\forall  \delta m $ and thus,
+\begin{align}
+    \fdv{F}{m \left( \vb{x} \right) } = 0 \implies \gamma \grad^2 m = \alpha_2 m + \alpha_4 m^3
+.\end{align}
+
+For $T > T_C$, $\alpha_2 > 0$ and thus $m = 0$.
+
+For $T < T_C$, $\alpha_2 < 0$ and thus 
+\begin{align}
+    m = \pm m_0 = \pm \sqrt{-\frac{\alpha_2}{\alpha_4}} 
+.\end{align}
+
+Thus mean field theory arises as a saddle point approximation in Landau-Ginzburg theory.
+
+\subsection{Domain Walls}
+
+Take $T < T_C$ in which there are 2 ground states, $\pm m_0$. Thus, consider $m \to \pm m_0$ as $x \to \pm \infty$, namely we have two distinct domains partitioned by a plane at the origin.
+
+Assume $m \left( \vb{x} \right) = m \left( x \right) $. Then, we have
+\begin{align}
+    \gamma \dv[2]{m}{x} = \alpha_2 m + \alpha_4 m^3
+.\end{align}
+
+This is solved by $m = m_0 \tanh \left( \frac{x-X}{W} \right) $ for $X \in \R$ and $W = \sqrt{-\frac{2\gamma}{\alpha_2}} $.
+
+% fig
+
+This describes the \textit{domain wall} at $x = X$ of width $W$.
+
+If our system has size $L$, then the free energy of $F \left[ m_0 \right] \propto L^{d}$. The cost of the domain wall is 
+\begin{align}
+    \Delta F &\equiv F \left[ m \left( x \right)  \right] - F \left( m_0 \right)  \\
+    &\sim  L^{d-1} \sqrt{\frac{-\gamma \alpha_2^3}{\alpha_4^2}}
+.\end{align}
+This scaling comes from the `area' of the directions perpendicular to the domain wall, of which there are $d - 1$. Near the critical point $\alpha_2 \to 0 \implies W \to \infty$ and $\Delta F \to 0$.
+
+Domain walls explain why the lower dimension is $d_{\ell} = 1$ for the Ising model. Let $d = 1$, and let $-\frac{1}{2}L < x < \frac{1}{2}L$, assuming $\alpha_2 \left( T \right) < 0$. Assume boundary conditions
+\begin{align}
+    m \left( \pm \frac{1}{2}L \right) = m_0
+.\end{align}
+
+Recall the probability of a given configuration is $\frac{1}{Z}e^{-\beta F \left[ m\left( \vb{x} \right)  \right] }$. Notice that we can also have two domain walls which define the boundaries of a region of spin $-m_0$.
+
+% fig
+
+This is an approximate saddle point. For well separated walls,
+\begin{align}
+    \Delta F_{\text{2 walls}} \approx 2 \Delta F
+.\end{align}
+
+Observe then that the relative probability of the two domain wall solution to the true ground state is
+\begin{align}
+    \frac{P \left( \text{2 domain walls at $X,Y$} \right)}{P \left( m = m_0 \right) }  = e^{-2\beta \Delta F}
+,\end{align}
+where we integrate over all possible $X$ and $Y$ to get the relative probability of two domain walls anywhere such that
+\begin{align}
+    \frac{P \left( \text{2 domain walls anywhere} \right)}{P \left( m = m_0 \right) }  = \int_{-\frac{L}{2}}^{\frac{L}{2}} \frac{\dd{X}}{W}\int_X^{\frac{L}{2}} \frac{\dd{Y}}{W}e^{-2\beta \Delta F} \sim  \left( \frac{L}{W} \right)^2 e^{-2 \beta \Delta F}
+.\end{align}
+
+For $d > 1$, the exponential dominates as $L \to \infty$ and thus this tends to zero (energy beats entropy). In $d=1$, however, this diverges as $L \to \infty$ as the `entropy term' beats the energy term (which is independent of $L$ in $d=1$).
+
+Therefore, in $d = 1$, it is much more probable to see two domain walls than $m = m_0$. Similarly, any region with $m \approx \pm m_0$ is unstable to formation of domain walls and thus the \textit{ordered phase doesn't exist}!
+
