@@ -1,0 +1,153 @@
+\lecture{5}{24/10/2024}{The Path Integral}
+
+We want to go beyond the saddle point approximation to calculate $Z$. To begin, we change our notation $m \left( \vb{x} \right) \to \phi \left( \vb{x} \right) $ and set $B = 0$. Then,
+\begin{align}
+    F \left[ \phi \left( \vb{x} \right)  \right] = \int \dd{^{d}x} \left( \frac{1}{2} \alpha_2 \left( T \right) \phi^2 + \frac{1}{4}\alpha_4 \left( T \right) \phi^{4} + \frac{1}{2} \gamma \left( T \right) \left( \grad \phi \right)^2 + \cdots \right) 
+.\end{align}
+
+Evaluating the path integral is easy if $F$ is only quadratic in $\phi$. It is still possible if higher order terms are small, and very hard if not impossible otherwise.
+
+For $T > T_C$, let $\mu^2 = \alpha_2 \left( T \right) > 0$. Consider a quadratic approximation to $F$. We have
+\begin{align}
+    F \left[ \phi \left( \vb{x} \right)  \right] = \frac{1}{2} \int \dd{^{d}x} \left( \mu^2 \phi^2 + \gamma \left( \grad \phi \right)^2 \right) 
+.\end{align}
+
+For $T < T_C$, $\alpha_2 \left( T \right)  < 0$ which implies $\left<\phi \right> = \pm m_0$. Let $\widetilde{\phi} = \phi - \left<\phi \right>$. This implies
+\begin{align}
+    F =  \underbrace{F\left[ m_0 \right]}_{\text{const}}  + \frac{1}{2} \int \dd{^{d}x} \left( \alpha_2' \left( T \right) \widetilde{\phi}^2 + \gamma \left( T \right) \left( \grad \widetilde{\phi} \right)^2 + \cdots \right) 
+,\end{align}
+where $\alpha_2' + 3m_0^2 \alpha_4 = - 2 \alpha_2 > 0$. Therefore the quadratic approximation gives that the system acts as if it is above the critical temperature under $\phi \to \widetilde{\phi}$ and $\mu^2 = \alpha_2' = 2 \left| \alpha_2 \right| > 0$.
+
+
+\subsection{Thermodynamic free energy}
+
+We aim to compute corrections to $F_\text{thermo}$ from fluctuations in $\phi \left( \vb{x} \right) $. We ignore $F \left[ m_0 \right] $ and $F_0 \left( T \right) $ here as they do not contribute with any physically significance).
+
+The Fourier transform of the field is
+\begin{align}
+    \phi_{\vb{k}} = \int \dd{^{d}x} e^{-i \vb{k} \cdot \vb{x}} \phi \left( \vb{x} \right) 
+,\end{align}
+where $\phi$ is real thus $\phi_{\vb{k}}^{*} = \phi_{-\vb{k}}$. We often call the \textit{wavevector} $\vb{k}$ a \textit{momentum} (as in qft one has $p = \hbar k$).
+
+Recall that we assumed $\phi$ doesn't vary on scales less than $a$. Expressing this more formally, we can state that $\phi_{\vb{k}} = 0$, $\forall  \left| k \right| > \Lambda$ where $\Lambda = \frac{\pi}{a}$ is called the \textit{UV cutoff}.
+
+Identically, the inverse Fourier transform is given by
+\begin{align}
+    \phi \left( \vb{x} \right) = \int \frac{\dd{^{d}k}}{\left( 2\pi \right)^{d}} e^{i \vb{k} \cdot \vb{x}} \phi_{\vb{k}}
+.\end{align}
+
+If our system occupies a finite volume cubic region with $V = L^{d}$, then $\vb{k}$ now takes discrete values $\vb{k} = \frac{2\pi}{L} n$ where $\vb{n} \in \Z^{d}$. Therefore our Fourier transform becomes discrete with
+\begin{align}
+    \int \frac{\dd{^{4}k}}{\left( 2\pi \right)^{d}} = \left( \frac{1}{L} \right)^{d} \sum_{\vb{n}} 
+,\end{align}
+and identically,
+\begin{align}
+    \phi \left( \vb{x} \right) = \frac{1}{V} \sum_{\vb{k}}^{} e^{i \vb{k} \cdot x} \phi_{\vb{k}} 
+.\end{align}
+
+Substituting this expression into the free energy, we see
+\begin{align}
+    F \left[ \phi_{\vb{k}} \right] = \frac{1}{2} \int \frac{\dd{^{d}k_1}}{\left( 2\pi \right)^{d}} \frac{\dd{^{d}k_2}}{\left( 2\pi \right)^{d}} \left( \mu^2 - \gamma \vb{k}_1 \cdot \vb{k}_2 \right) \phi_{\vb{k}_1} \phi_{\vb{k}_2} e^{i \left( \vb{k}_1 + \vb{k}_2 \right) \cdot \vb{x}}
+,\end{align}
+where we see that as the Fourier transform of the delta function is
+\begin{align}
+    \int \dd{^{d}x} e^{i \left( \vb{k}_1 + \vb{k}_2 \right) \cdot \vb{x}} = \left( 2\pi \right)^{d} \left( \vb{k}_1 + \vb{k}_2 \right) 
+,\end{align}
+we have with $\vb{k} = \vb{k}_1$,
+\begin{align}
+    F = \frac{1}{2} \int \frac{\dd{^{d}k}}{\left( 2\pi \right)^{d}} \left( \mu^2 + \gamma \vb{k}^2 \right) \phi_{\vb{k}} \phi_{-\vb{k}}
+.\end{align}
+
+Using the reality condition of $\phi_{-\vb{k}} = \phi_{\vb{k}}^{*}$, we can write this as
+\begin{align}
+    F = \frac{1}{2} \int \frac{\dd{^{d}k}}{\left( 2\pi \right)^{d}} \left( \mu^2 + \gamma \vb{k}^2 \right) \left| \phi_{\vb{k}} \right|^2 
+,\end{align}
+where as this is an even function of each component, we can integrate only over the region in which $k_x > 0$ to give
+\begin{align}
+    F &= \int_{k_x > 0} \frac{\dd{^{d}k}}{\left( 2\pi \right)^{d}} \left( \mu^2 + \gamma \vb{k}^2 \right) \left| \phi_{\vb{k}} \right|^2 \\
+      &= \frac{1}{V} \sum_{\vb{k} | k_x > 0}^{}  \left( \mu^2 + \gamma t^2 \right)  \left| \phi_{\vb{k}} \right|^2
+.\end{align}
+
+We define the measure
+\begin{align}
+    \int \mathcal{D} \phi \left( \vb{x} \right) = N\prod_{\vb{k}  \mid k_x > 0} \int \dd{\Re \phi_{\vb{k}}} \dd{\Im \phi_{\vb{k}}}
+,\end{align}
+where $N$ is some normalization constant.
+
+Thus, the partition function can be written
+\begin{align}
+    Z = N \left( \Pi_{\vb{k} | k_x > 0} \right) \left( \prod_{\vb{k}  \mid k_x > 0} \int \dd{\Re \phi_{\vb{k}}} \dd{\Im \phi_{\vb{k}}}  \right) \exp \left[ -\frac{\beta}{V} \sum_{\vb{k} | k_x > 0}^{} \left( \mu^2 + \gamma \vb{k}^2 \right) \left| \phi_{\vb{k}} \right|^2  \right] 
+,\end{align}
+where pulling the sum out of the exponential we see
+\begin{align}
+    Z = N \left( \Pi_{\vb{k} | k_x > 0} \right) \left( \prod_{\vb{k}  \mid k_x > 0} \int \dd{\Re \phi_{\vb{k}}} \dd{\Im \phi_{\vb{k}}}   \exp \left[ -\frac{\beta}{V} \left( \mu^2 + \gamma \vb{k}^2 \right)  \left( \left( \Re \phi_{\vb{k}} \right)^2 + \left( \Im \phi_{\vb{k}} \right)^2    \right)   \right] \right)
+.\end{align}
+
+Recall that 
+\begin{align}
+    \int_{-\infty}^{\infty} \dd{x} e^{-\frac{x^2}{a}} = \sqrt{\pi a} 
+.\end{align}
+
+Therefore we see that
+\begin{align}
+    Z = N \prod_{\vb{k}  \mid k_x > 0} \left[ \sqrt{\frac{\pi V T}{\mu^2 + \gamma \vb{k}^2}}  \right] = N  \prod_{\vb{k}  \mid k_x > 0} \frac{\pi V T}{\mu^2 + \gamma \vb{k}^2}
+.\end{align}
+
+Therefore,
+\begin{align}
+    \frac{F_\text{thermo}}{V} &= -\frac{T}{V} \log Z \\
+    &= - \frac{T}{V} \sum_{\vb{k} | k_x > 0}^{} \log \left( \frac{\pi V T}{\mu^2 + \gamma \vb{k}^2} \right) + \frac{T}{V} \log N 
+.\end{align}
+
+Recall that this is a correction to the previous results. Therefore to compute the contribution of these fluctuations to the heat capacity, recall that
+\begin{align}
+    \left<E \right> &= - \pdv{\log Z}{\beta} \\
+    &= \pdv{ \left( \beta F_\text{thermo} \right) }{\beta}
+,\end{align}
+and
+\begin{align}
+    C &= \pdv{ \left<E \right>}{T} \\
+    &= -\beta^2 \pdv{\left<E \right>}{\beta} \\
+    &= -\beta^2 \pdv[2]{\left( \beta F_\text{thermo} \right) }{\beta} 
+,\end{align}
+and thus
+\begin{align}
+    \frac{C}{V} = - \beta^2 \pdv[2]{\beta} \left[ -\frac{1}{V} \sum_{\vb{k} | k_x > 0}^{} \log \left( \frac{\pi V T}{\mu^2 + \gamma \vb{k}^2} \right)   \right] 
+.\end{align}
+
+Take $\mu^2 = T - T_C$ and $\gamma \in \R$ for simplicity and assume $T > T_C$. Then,
+\begin{align}
+    \frac{C}{V} = \frac{1}{V} \sum_{\vb{k} | k_x > 0}^{}  \left[ 1 + \frac{2T}{\mu^2 + \gamma \vb{k}^2} + \frac{T^2}{\left( \mu^2 + \gamma \vb{k}^2 \right)^2} \right] 
+,\end{align}
+where converting back to the integral notation, we see that
+\begin{align}
+    \frac{C}{V} &= \int_{k_x > 0} \frac{\dd{^{d}k}}{\left( 2\pi \right)^{d}}\left[ 1 + \frac{2T}{\mu^2 + \gamma \vb{k}^2} + \frac{T^2}{\left( \mu^2 + \gamma \vb{k}^2 \right)^2} \right] \\
+    &= \frac{1}{2} \int \frac{\dd{^{d}k}}{\left( 2\pi \right)^{d}}\left[ 1 + \frac{2T}{\mu^2 + \gamma \vb{k}^2} + \frac{T^2}{\left( \mu^2 + \gamma \vb{k}^2 \right)^2} \right]
+,\end{align}
+the first term gives us $\frac{1}{2}k_0$ for every degree of freedom (as the equipartition theorem predicts). The other terms may diverge as $T \to T_C$ (i.e. as $\mu^2 \to 0$). The integral may not converge, and $\vb{k} = 0$ is an example of an \textit{IR divergence} corresponding to a long wavelength/low energy. The final term in particular we see is proportional to
+\begin{align}
+    \int_0^{\Lambda} \frac{\dd{k} k^{d-1}}{\left( \mu^2 + \gamma k^2 \right) } 
+,\end{align}
+where setting $k = \sqrt{\frac{\mu^2}{\gamma}} x$, as $T \to T_C$
+\begin{align}
+    \int_0^{\Lambda} \frac{\dd{k} k^{d-1}}{\left( \mu^2 + \gamma k^2 \right) }  &=  \frac{\mu^{d-1}}{\gamma^{\frac{d}{2}}} \int_0^{\Lambda \sqrt{\frac{x}{\mu^2}} } \frac{\dd{x} x^{d-1}}{\left( 1 + x^2 \right)^2} = \begin{cases}
+        \Lambda^{d-4}, & d > 4, \\
+        \log \Lambda, & d = 4,\\
+        \mu^{d-4} & d < 4.
+    \end{cases}
+\end{align}
+
+Similarly, the second term is proportional to
+\begin{align}
+    \int_0^{\Lambda} \frac{\dd{k}k^{d-1}}{\mu^2 + \gamma k^2} \sim  \begin{cases}
+        \Lambda^{d-2}, & d > 2,\\
+        \log \Lambda, & d = 2,\\
+        \mu^{-1} d = 1.
+    \end{cases}
+\end{align}
+
+Therefore the contributions of fluctuations is finite as $T \to T_C$ in $d \geq 4$, however for $d < 4$, these contributions diverge as here
+\begin{align}
+    c \sim \mu^{d-2} \sim  \left| T - T_C \right|^{-\alpha}
+,\end{align}
+where $\alpha = 2-\frac{d}{2}$. These fluctuations explain why the MFT value of $\alpha = 0$ is wrong, but this value is also wrong! The reason for this is that we can't neglect the $\phi^{4}$ term.
