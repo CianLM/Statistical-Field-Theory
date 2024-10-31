@@ -1,0 +1,156 @@
+\lecture{6}{29/10/2024}{}
+
+\subsection{Correlation Functions}
+
+We know
+\begin{align}
+    \left<\phi \left( \vb{x} \right)  \right> = \begin{cases}
+        0, & T > T_C, \\
+        \pm m_0, & T < T_C
+    \end{cases}
+.\end{align}
+
+Fluctuations about this mean are captured by correlation functions. Namely,
+\begin{align}
+    \left<\left( \phi \left( \vb{x} \right) - \left<\phi \left( \vb{x} \right)  \right> \right) \left( \phi \left( \vb{y} \right) - \left<\phi \left( \vb{y} \right)  \right> \right)   \right> = \left<\phi \left( \vb{x} \right) \phi \left( \vb{y} \right)  \right> - \left<\phi \left( \vb{x} \right)   \right> \left<\phi \left( \vb{y} \right)  \right>
+.\end{align}
+
+We can compute this by including a spatially varying magnetic field $B\left( \vb{x} \right) $ such that the free energy becomes $F \left[ \phi,B \right] $, Namely,
+\begin{align}
+    F \left[ \phi ,B \right] = \int \dd{^{d}x} \left( \frac{1}{2}\mu^2 \phi^2 + \frac{1}{2} \gamma \left( \grad \phi \right)^2 - B \left( \vb{x} \right) \phi \left( \vb{x} \right)  \right) 
+.\end{align}
+
+Then, we see
+\begin{align}
+    Z \left[ B \left( \vb{x} \right)  \right] = \int \mathcal{D} \phi e^{-\beta F \left[ \phi , B \right] }
+.\end{align}
+
+This functional contains lots of information. For example,
+\begin{align}
+    \frac{1}{\beta} \fdv{\log Z}{B \left( \vb{x} \right) } = \frac{1}{\beta Z} \fdv{Z}{B\left( \vb{x} \right) } = \frac{1}{2} \int \mathcal{D} \phi \phi \left( \vb{x} \right) e^{-\beta F \left[ \phi, B \right] } = \left<\phi \left( \vb{x} \right)  \right>_B
+.\end{align}
+
+The second derivative similarly provides
+\begin{align}
+    \frac{1}{\beta^2} \frac{\delta^2 \log Z}{\delta B\left( \vb{x} \right) \delta B\left( \vb{y} \right) } &= \frac{1}{\beta^2 Z} \frac{\delta^2Z}{\delta B \left( \vb{x} \right) \delta B \left( \vb{y} \right) } - \frac{1}{\beta^2 Z^2} \fdv{Z}{B \left( \vb{x} \right) } \fdv{Z}{B \left( \vb{y} \right) } \\
+    &= \left<\phi \left( \vb{x} \right) \phi \left( \vb{y} \right)  \right>_B - \left<\phi \left( \vb{x} \right)  \right>_B \left<\phi \left( \vb{y} \right)  \right> 
+.\end{align}
+
+Then if we set $B = 0$ after evaluating the functional derivatives, we see
+\begin{align}
+    \frac{1}{\beta^2} \frac{\delta^2 \log Z}{\delta B \left( \vb{x} \right) \delta B \left( \vb{y} \right) } \bigg|_{B=0} = \left<\phi \left( \vb{x} \right) \phi \left( \vb{y} \right)  \right> - \left<\phi \right>^2
+,\end{align}
+which is the correlation function we desired.
+
+
+Now we move to calculate $Z \left[ B \left( \vb{x} \right)  \right] $ in Fourier space with
+\begin{align}
+    F \left[ \phi ,B  \right] = \int \frac{\dd{^{d}k}}{\left( 2\pi \right)^{d}} \left[ \frac{1}{2} \left( \mu^2 + \gamma \vb{k}^2 \right) \left| \phi_k \right|^2 - B_{-\vb{k}} \phi_{\vb{k}} \right] 
+.\end{align}
+
+We complete the square by writing $\hat{\phi}_{\vb{k}} = \phi_{\vb{k}} - \frac{B_{\vb{k}}}{\mu^2 + \gamma \vb{k}^2}$ which gives us
+\begin{align}
+    F = \int \frac{\dd{^{d}k}}{\left( 2\pi \right)^{d}} \left[ \frac{1}{2} \left( \mu^2 + \gamma \vb{k}^2 \right) \left| \hat{\phi}_{\vb{k}} \right|^2 - \frac{1}{2} \frac{\left| B_{\vb{k}} \right|^2}{\mu^2 + \gamma \vb{k}^2} \right] 
+.\end{align}
+
+Shifting $\phi_{\vb{k}} \to \hat{\phi}_{\vb{k}}$ in the path integral leaves the measure invariant as it still spans all possible functions. Thus, the partition function becomes
+\begin{align}
+    Z &= N \int \prod_{k} \dd{\Re \hat{\phi}_{\vb{k}}} \dd{\Im \hat{\phi}_{\vb{k}}} e^{- \beta F} \\
+    &= e^{-\beta F_{\text{thermo}}} \exp \left( \frac{\beta}{2} \int \frac{\dd{^{d}k}}{\left( 2\pi \right)^{d}} \frac{\left| B_{\vb{k}} \right|^2}{\mu^2 + \gamma \vb{k}^2} \right)  \\
+    &= e^{-\beta F_\text{thermo}} \exp \left( \frac{\beta}{2} \int \dd{^{d}x} \dd{^{d}y} B\left( \vb{x}\right) G \left( \vb{x} - \vb{y}\right) B \left( \vb{y}     \right)  \right) 
+,\end{align}
+where 
+\begin{align}
+    G \left( \vb{x} \right) = \int \frac{\dd{^{d}k}}{\left( 2\pi \right)^{d}} \frac{e^{-i \vb{k} \cdot \vb{x}}}{\mu^2 + \gamma \vb{k}^2}
+.\end{align}
+
+Thus, we arrive at the correlation function,
+\begin{align}
+    \left< \phi \left( \vb{x} \right) \phi \left( \vb{y} \right)  \right> - \left<\phi \right>^2 = \frac{1}{\beta} G \left( \vb{x} - \vb{y} \right) 
+.\end{align}
+
+Let $\xi^2 = \frac{\gamma}{\mu^2}$. 
+
+\begin{claim}
+    For $r = \left| x \right| $,
+    \begin{align}
+        G \left( \vb{x} \right) \sim  \begin{cases}
+            \frac{1}{r^{d-2}}, & r \ll \xi, \\
+            \frac{e^{-\frac{r}{\xi}}}{\xi^{\frac{d-3}{2}}r^{\frac{d-1}{2}}}, & r \gg \xi.
+        \end{cases}
+    \end{align}
+\end{claim}
+
+\begin{proof}
+    
+\end{proof}
+
+This tells us that fluctuations occur over sizes $\left| x \right| \lesssim \xi$ and decay rapidly for $\left| x \right| > \xi$. In general, this property defines the \textbf{correlation length} $\xi$.
+
+\begin{claim}
+    $G$ is a \textbf{Green function} such that
+    \begin{align}
+        \left( -\gamma \grad^2 + \mu^2 \right) G\left( \vb{x} \right) = \delta^{\left( d \right) }\left( \vb{x} \right) 
+    .\end{align}
+\end{claim}
+
+\begin{proof}
+    
+\end{proof}
+
+There is another critical exponent we can define. Namely, as
+\begin{align}
+    \xi \sim  \frac{1}{\left| T - T_C \right|^{\nu}}
+,\end{align}
+which at the critical temperature diverges $\xi \to \infty$, we define $\eta$ such that
+\begin{align}
+    \left< \phi \left( \vb{x} \right) \phi \left( 0 \right)  \right> \sim  \frac{1}{r^{d-2+\eta}}
+.\end{align}
+
+\begin{table}[h]
+    \centering
+    \caption{Predictions}
+    \begin{tabular}{ccccc}
+     & MFT + Quadratic fluctuations & $d=2$ & $d = 3$ & $d \geq 4$ \\
+     \midrule
+        $\eta$ & 0 & $\frac{1}{4}$ & $0.0363$ & 0 \\
+        $\nu$ & $\frac{1}{2}$ & 1 & 0.63 & $\frac{1}{2}$
+    \end{tabular}
+\end{table}
+
+\subsection{Susceptibility}
+
+Recall that the susceptibility in MFT (without spatial variations) was how easily the mean field value is changed when the magnetic field is increased. 
+
+In more generality, we define
+\begin{align}
+    \chi \left( \vb{x},\vb{y} \right) &= \fdv{\left<\phi \left( \vb{x} \right)  \right>_B}{B\left( \vb{y} \right) } \\
+                                     &= \fdv{B \left( \vb{y} \right) } \left[ \frac{1}{\beta} \fdv{\log Z}{B \left( \vb{x} \right) } \right]  \\
+                                     &= \beta \left( \left<\phi \left( \vb{x} \right) \phi \left( \vb{y} \right) - \left<\phi \right>^2 \right> \right)  \\
+                                     &= G \left( \vb{x} - \vb{y} \right)
+,\end{align}
+which motivates the intuition of interpreting $\chi$ as the variance in $\phi$ at $\vb{x}$ when we increase the magnetic field at $\vb{y}$.
+
+If there is no spatial variation, then
+\begin{align}
+    \left<\phi \right> &= \frac{1}{V} \int \dd{^{d}x} \left<\phi \left( \vb{x} \right)  \right> \\
+    \delta \left<\phi \right> &= \frac{1}{V} \int \dd{^{d}x} \dd{^{d}y} \fdv{\left<\phi \left( \vb{x} \right)  \right>}{B\left( \vb{y} \right) } \delta B \left( \vb{y} \right)  \\
+    &= \frac{1}{V} \int \dd{^{d}x} \dd{^{d}y} \chi \left( \vb{x}, \vb{y} \right) \delta B \\
+    &= \frac{1}{V} \int \dd{^{d}x} \dd{^{d}y} G \left( \vb{x} - \vb{y} \right)  \\
+    &= \int \dd{^{d}x} G \left( \vb{x} \right)
+.\end{align}
+
+This diverges as $\left| x \right| \to \infty$ and $T \to T_C$. Taking
+\begin{align}
+    \xi \sim  \int r^{d -1} \dd{r} \frac{e^{-\frac{r}{\xi}}}{\xi^{\frac{d-3}{2}} r^{\frac{d-1}{2}}}
+,\end{align}
+where with $r = \xi y$, we see
+\begin{align}
+    \chi \sim \xi^2 \sim  \frac{1}{\left| T - T_C \right| }
+.\end{align}
+Thus this predicts $\gamma = 1$ as before.
+
+
+
+
+

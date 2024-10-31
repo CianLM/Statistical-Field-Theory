@@ -1,0 +1,126 @@
+\lecture{7}{31/10/2024}{The Renormalization Group}
+
+The ``Ginzburg criterion'' states that mean field theory can't be trusted when fluctuations in $\phi $ are large compared to $\left<\phi  \right> \sim  \pm m_0$.
+
+Observe that the average fluctuation size can be approximated with
+
+\begin{align}
+R = \frac{\displaystyle\int_{\underset{\left| x \right| < \xi}{\left| y \right| < \xi}} \dd{^{d}x} \dd{^{d}y} \left< \left( \phi \left( \vb{x} \right)  - \left<\phi \left( \vb{x} \right)  \right> \right) \left( \phi \left( \vb{y} \right) - \left<\phi \left( \vb{y} \right)  \right> \right)  \right>}{\displaystyle\int_{\left| x \right| < \xi} \dd{^{d}x} \left<\phi \left( \vb{x} \right)  \right>\int_{\left| y \right| < \xi} \dd{^{d}y} \left<\phi \left( \vb{y} \right)  \right>} 
+,\end{align}
+which becomes
+\begin{align}
+    R &\sim  \frac{\displaystyle\int_{\left| x \right| < \xi, \left| y \right| < \xi} \frac{1}{\beta} G\left( \vb{x}' \right) \dd{^{d}x'} \dd{^{d}y'}}{\left( \xi^{d}m_0 \right)^2} \\
+    &\sim  \frac{\xi^{d}}{\xi^{2d} m_0^2} \int_0^{\xi} r^{d-1} \dd{r} \frac{1}{r^{d-2}} \\
+    &\sim  \frac{\xi^{2-d}}{m_0^2} \\
+    &\sim  \frac{\left( \left|  T - T_C \right|^{-\frac{1}{2}} \right)^{2-d} }{\left( \left| T - T_C \right|^{\frac{1}{2}} \right)^{2}} \\
+    &\sim  \left| T - T_C \right|^{\frac{d-1}{2}}
+,\end{align}
+thus we see that mean field theory will be bad as $T \to T_C$ for $d < 4 = d_c$, the upper critical dimension. However for $d \geq 4$, we see that mean field theory does work as the fluctuations are small.
+
+
+\section{The Renormalization Group}
+
+Now, we want to include non-quadratic terms in $F$ such as $\phi^{4}$.
+
+Recall that the free energy (if we rescale $\phi$ such that we can set $\gamma = 1$) is given by
+\begin{align}
+    F \left[ \phi \right] = \int \dd{^{d}x} \left[ \frac{1}{2} \left( \grad \phi \right)^2 + \frac{1}{2}\mu^2 \phi^2 + g \phi^{4} + \cdots \right] 
+.\end{align}
+
+We now allow all possible terms in $F$ consistent with analyticity and symmetries. This essentially restricts us to terms of the form $\phi^{2n}$ or $\phi^{5} \left( \grad \phi \right)^2 \grad^2 \phi$.
+
+Terms like $\phi^{17}$ break the $\Z_2$ symmetry, and $\phi^{-2}$ ones break analyticity.
+
+Each valid term has a coupling constant $\left( \mu^2, g , \cdots \right) $. We view these as coordinates in an infinite dimensional ``theory space'' where these coordinates parametrize all possible theories. 
+
+We further rescale $\phi$ such that it absorbs the leading $\frac{1}{\beta}$ in the path integral, so it now reads
+\begin{align}
+    Z = \int \mathcal{D} \phi e^{- F \left[ \phi \right] }
+.\end{align}
+
+To make this well defined recall that we introduce a UV cut-off such that $\phi_{\vb{k}} = 0$, for $\left| \vb{k} \right| > \Lambda \sim  \frac{1}{a}$ where $a$ is the size of the boxes we course grain over.
+
+
+Suppose we only care about the physics on some long distance scale $L$ and thus don't care about $\phi_k$ for $\left| k \right| \gg L^{-1}$. We are then going to construct a new theory with a lower cutoff $\Lambda' = \frac{\Lambda}{\zeta}$ with $\zeta > 1$. This should work as long as $\Lambda' \gg L^{-1}$.
+
+Thus, we write
+\begin{align}
+    \phi_{\vb{k}} = \phi_{\vb{k}}^{-} + \phi_{\vb{k}}^{+}
+,\end{align}
+where
+\begin{align}
+    \phi_{\vb{k}}^{-} = \begin{cases}
+        \phi_{\vb{k}}, & \left| \vb{k} \right| < \Lambda',\\
+        0, & \left| \vb{k} \right| > \Lambda^{-},
+    \end{cases}
+\end{align}
+and similarly
+\begin{align}
+    \phi_{\vb{k}}^{-} = \begin{cases}
+        \phi_{\vb{k}}, & \Lambda' < \left| \vb{k} \right| < \Lambda,\\
+        0, & \text{otherwise,}
+    \end{cases}
+\end{align}
+which are the short-wavelength (UV) modes we want to integrate out. 
+
+Notice that we can write
+\begin{align}
+    F\left[ \phi_{\vb{k}} \right] = F_0 \left[ \phi_{\vb{k}}^{-} \right] + F_{0} \left[ \phi_{\vb{k}}^{+} \right]  + F_{I}\left[ \phi_{\vb{k}}^{-}, \phi_{\vb{k}}^{+} \right] 
+,\end{align}
+where $F_{I}$ is the interaction terms.
+
+Then, the partition function/path integral becomes
+\begin{align}
+    Z &= \int \prod_{\left| \vb{k} \right| < \Lambda} \dd{\phi_{\vb{k}}^{-}} e^{- F \left[ \phi_{\vb{k}}^{-} \right] } \int \prod_{\Lambda' < \left| \vb{k} \right| < \Lambda} \dd{\phi_{\vb{k}}} e^{- F_0 \left[ \phi_{\vb{k}}^{+} \right] - F_I \left[ \phi_{\vb{k}}^{-}, \phi_{\vb{k}}^{+} \right]  } \\
+    &= \int \prod_{\left| \vb{k} \right| < \Lambda'} \dd{\phi^{-}_{\vb{k}}} e^{-F' \left[ \phi_{\vb{k}}' \right]} 
+,\end{align}
+where $F' \left[ \phi_{\vb{k}}^{-} \right] $ is the \textit{Wilsonian effective free energy} obtained by ``integrating out'' the UV modes to obtain a theory with a lower cutoff $\Lambda'$.
+
+$F'$ here must take the same general form as $F$ since we included all possible terms,
+\begin{align}
+    F' \left[ \phi \right] = \int \dd{^{d}x} \left( \frac{1}{2} \gamma' \left( \grad \phi \right)^2 + \frac{1}{2} \mu'^2 \phi^2 + g' \phi^{4} + \cdots \right) 
+,\end{align}
+but the values of the coupling constants will differ. We want to compare this with the original theory, but they have different cut-offs. So we rescale $\vb{k}' = \zeta \vb{k}$, then $\left| \vb{k}' \right| < \xi \Lambda' = \Lambda$, or similarly, $\vb{x}' = \frac{\vb{x}}{\zeta}$ so $\vb{k} \cdot \vb{x} = \vb{k}' \cdot \vb{x}'$.
+
+Therefore observe that
+\begin{align}
+    \int \dd{^{d}x} \frac{1}{2} \gamma' \left( \grad \phi \right)^2 = \int \zeta^{d} \dd{^{d}x'} \frac{1}{2} \gamma' \zeta^{-2} \left( \grad' \phi \right)^2
+.\end{align}
+
+We then rescale $\phi' \left( \vb{x}' \right) = \zeta^{\frac{d-2}{2}} \sqrt{\gamma'}  \phi \left( \vb{x} \right)$, this gives us
+\begin{align}
+    F' \left[ \phi' \right] = \int \dd{^{d}x'} \left[ \frac{1}{2} \left( \grad' \phi' \right)^2 + \frac{1}{2}\mu \left( \zeta \right)^2 \phi'^2 + g \left( \zeta \right) \phi'^{4} \right] 
+,\end{align}
+which we can now compare to the original theory as it has the same cutoff and normalization of the first term ($\gamma = 1$). As $\zeta$ increases (i.e. as we decrease our coupling), we obtain a flow in theory space.
+
+% fig
+
+The map $R \left( \zeta \right) : F \mapsto F'$ is a \textbf{renormalization group} (RG) transformation that obeys
+\begin{align}
+    R \left( \zeta_1 \right) R \left( \zeta_2 \right) = R \left( \zeta_1 \zeta_2 \right) 
+,\end{align}
+but $R \left( \zeta \right) $ is not invertible and thus is actually a \textit{semigroup} not a group (it was given a bad name).
+
+In summary there are three steps to the renormalization group:
+\begin{enumerate}[label=\arabic*)]
+    \item Integrate out high momentum modes $\frac{\Lambda}{3} < \left| \vb{k} \right| < \Lambda$,
+    \item Rescale $\vb{k}' = \zeta \vb{k}$ and $\vb{x}' = \frac{x}{\zeta}$,
+    \item Rescale the fields to get canonically normalized gradient terms.
+\end{enumerate}
+
+The natural question is how does RG flow behave as $\zeta \to \infty$? It is possible that the flow diverges in theory space, i.e. some or all coefficients diverge. It is also possible for the flow to approach a fixed point. These are of incredible importance.
+
+One might also expect the flow to approach a limit cycle or wander aimlessly, but these do not happen.
+
+Let's focus on a fixed point. After step $2$, $\xi' = \frac{\xi}{\zeta}$. However, at a fixed point, $\xi' = \xi$. The only solution is that $\xi = 0$ or $\infty$.
+
+In the disordered phase, $T > T_C$, $\xi = 0$ in the limit $T \to \infty$.
+
+In the ordered phase, $T < T_C$, $\xi = 0$ in the limit $T \to 0$. 
+
+
+These are \textbf{trivial fixed points}. We are interested in the case for which $\xi = \infty$, which occurs at a critical point of a continuous phase transition.
+
+
+
+
