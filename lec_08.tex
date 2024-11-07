@@ -1,0 +1,117 @@
+\lecture{8}{05/11/2024}{Scaling Dimension}
+
+All points on RG trajectories have the same long-distance physics, controlled by the fixed point. Namely, we have different microscopic theories with the same long-distance behaviour. This is an example of universality. 
+
+As $\xi' = \xi / \zeta = \infty$ as $\zeta \to \infty$, we must have that $\zeta = \infty$ for all points on the trajectory approaching the fixed point.
+
+At a fixed point, we want to classify couplings.
+\begin{itemize}
+    \item If we turn on a (combination of) couplings and RG flow takes us back to the fixed point, this coupling is said to be \textbf{irrelevant}. These don't change the long distance physics.
+    \item If we do the same and RG flow takes us away from the fixed point, this coupling is called \textbf{relevant}.
+    \item If we had a line (or surface) of fixed points, then RG flowing along the line is called a \textbf{marginal} coupling. These are very rare.
+\end{itemize}
+
+Typically there are just a few relevant directions/couplings and infinitely many irrelevant directions. The basin of attraction of a fixed point is called its \textbf{critical surface}.
+
+% fig
+
+The \textbf{codimension} of this surface is the number of relevant deformations about this fixed point.
+
+All theories on the critical surface flow to the fixed point and therefore have the same long-distance behaviour. This is why universality exists.
+
+\subsection{Scaling}
+
+With dimensional analysis, we can measure dimensions in units of inverse length. As $\left[ x  \right] = -1$, $\left[ \pdv{x} \right]=1$, $\left[ F \right] = 0$ such that $e^{-F}$ makes sense and thus as $F\left[ \phi \right] = \int \dd{^{d}x} \left( \grad \phi \right)^2 + \cdots$, we have $\left[ \phi \right] = \frac{d - 2}{2}$.
+
+At the critical point,
+\begin{align}
+    \left<\phi \left( \vb{x} \right) \phi \left( \vb{0} \right)  \right> \sim  \frac{1}{r^{d-2+\eta}}
+,\end{align}
+where dimensional analysis tells us $\eta = 0$, which experiments contradict. The reason for this is that there is another length scale present. Making this dimensionally constant, we see
+\begin{align}
+    \left<\phi \left( \vb{x} \right) \phi \left( \vb{0} \right)  \right> \sim  \frac{a^2}{r^{d-2+\eta}}
+.\end{align}
+
+$\eta \neq 0$ can come from rescaling the field (Step 3) in the RG procedure: $\phi' \left( \vb{x}' \right) = \zeta^{\Delta_\phi} \phi \left( \vb{x} \right) $.
+
+$\Delta_\phi$ is the \textbf{scaling dimension} of $\phi$ and $\frac{d-2}{2}$ is sometimes called the ``naive dimension''. Using the scaling dimension, we see that at the critical point
+\begin{align}
+    \left<\phi' \left( \vb{x}' \right) \phi' \left( 0 \right)  \right> = \zeta^{2 \Delta_\phi} \left<\phi \left( \vb{x} \right)\phi \left( 0 \right)    \right> \sim  \frac{\zeta^{2 \Delta_\phi}}{r^{d-2+\eta}}
+.\end{align}
+
+But as the critical point is a fixed point, we have
+\begin{align}
+    \frac{1}{r'^{d - 2 + \eta}} = \frac{\zeta^{d-2+\eta}}{r^{d-2+\eta}}
+,\end{align}
+and thus
+\begin{align}
+    \Delta_{\phi} = \frac{d-2}{2} + \frac{\eta}{2}
+,\end{align}
+where $\frac{\eta}{2}$ is called the \textbf{anomalous dimension}.
+
+
+Near the fixed point, as $\xi' = \xi / \zeta \implies \Delta_{\xi} = -1$. We previously found $\xi \sim  t^{-\nu}$ with $t$ being the \textit{reduced temperature}
+\begin{align}
+    t = \frac{\left| T - T_C \right| }{T_C}
+,\end{align}
+where $t' = \zeta^{\Delta_t} t$ changes under the RG flow. We can then deduce $\Delta_t = \frac{1}{\nu}$.
+
+One might expect there to be relations between these critical exponents. Indeed, writing
+\begin{align}
+    F_\text{thermo}\left( t \right) = \int \dd{^{d}x} f\left( t \right) 
+,\end{align}
+notice that the RG flow does not change the value of $F_\text{thermo} = - \log Z$, namely, it does not change the physics.
+
+Therefore
+\begin{align}
+    F'_\text{thermo}\left( t' \right) = F_\text{thermo}\left( t \right) 
+.\end{align}
+
+At a fixed point, $f' \equiv f$, therefore near the fixed point,
+\begin{align}
+    \int \dd{^{d}x'} f' \left( t' \right) = \int \dd{^{d}x} \zeta^{-d} f\left( \zeta^{\Delta_t} t \right) 
+.\end{align}
+
+This implies we have $f\left( t \right) \sim  t^{\frac{d}{\Delta_t}} = t^{d\nu}$.
+
+With spins correlated over ``blocks'' of size $\xi$, extensivity implies $F_\text{thermo} \sim  \text{num. of blocks} \sim \left( \frac{L}{\xi} \right)^{d} \sim  t^{d\nu}$. One can think of this as the size of blocks over which spins are correlated. 
+
+Further as
+\begin{align}
+    c \sim  \pdv[2]{f}{t} \sim  t^{d \nu - 2}
+,\end{align}
+but $c \sim  t^{-\alpha}$, and thus
+\begin{align}
+    \alpha = 2 - d \nu
+.\end{align}
+
+This is called the \textbf{hyperscaling relation}.
+
+
+
+As a second example, consider $T< T_C$ but close to it. This implies $\phi \sim t^{\beta}$, then $\Delta_\phi = \beta \Delta_t = \frac{\beta}{\nu}$, and thus
+\begin{align}
+    \beta = \nu \Delta_\phi = \frac{1}{2} \left( d - 2 + \eta \right) \nu
+.\end{align}
+
+Further, with a magnetic field $B$, the free energy $F$ includes a term $\int \dd{^{d}x} B\left( \vb{x} \right) \phi \left( \vb{x} \right)$. At a critical point $F$ is invariant under a renormalization group flow and thus $\Delta_B \delta_\phi = d$ and thus
+\begin{align}
+    \Delta_B = \frac{d + 2 - \eta}{2}
+.\end{align}
+
+As
+\begin{align}
+    \chi = \left( \pdv{\phi}{B} \right)_T \sim  t^{-\gamma} \implies \Delta_\phi - \Delta_B = - \frac{\gamma}{\nu} \implies \gamma = \nu \left( 2 - \eta \right) 
+.\end{align}
+
+Lastly, near the critical point, $\phi \sim  B^{\frac{1}{\delta}}$, and therefore
+\begin{align}
+    \delta = \frac{\Delta_B}{\Delta_{\phi}} = \frac{d + 2 - \eta}{d - 2 + \eta}
+.\end{align}
+
+Thus we have shown, if we know $\eta, \nu$, we can compute $\alpha, \beta, \gamma$ and $\delta$.
+
+This works well for the Ising model in $d=2,3$ and for $d=4$ MFT with quadratic fluctuations. It disagrees however with mean field theory for $\beta$ and $\delta$ for $d > 4$. 
+
+This will be resolved when we consider a more accurate expansion of fields, (e.g. we should have taken $\phi \sim \sqrt{\frac{t}{g}} $).
+
